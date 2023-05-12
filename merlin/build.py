@@ -26,9 +26,9 @@ def get_or_create():
         print("config.json.js not found，build.py is root path. auto write config.json.js")
         conf["module"] = module_name
         conf["version"] = "0.1.0"
-        conf["home_url"] = ("Module_%s.asp" % module_name)
-        conf["title"] = "title of " + module_name
-        conf["description"] = "description of " + module_name
+        conf["home_url"] = f"Module_{module_name}.asp"
+        conf["title"] = f"title of {module_name}"
+        conf["description"] = f"description of {module_name}"
     else:
         with codecs.open(conf_path, "r", "utf-8") as fc:
             conf = json.loads(fc.read())
@@ -52,11 +52,11 @@ def build_module():
         return
     module_path = os.path.join(parent_path, module_root)
     if not os.path.isdir(module_path):
-        print("%s dir not found，check config.json.js is module ?" % module_path)
+        print(f"{module_path} dir not found，check config.json.js is module ?")
         return
     install_path = os.path.join(module_path, "install.sh")
     if not os.path.isfile(install_path):
-        print("%s file not found，check install.sh file" % install_path)
+        print(f"{install_path} file not found，check install.sh file")
         return
 
     with codecs.open(os.path.join(module_path, "version"), "w", "utf-8") as fw:
